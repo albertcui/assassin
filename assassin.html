@@ -18,14 +18,20 @@
       };
       var map = new google.maps.Map(document.getElementById('map-canvas'),
           mapOptions);
-
+      var marker = new google.maps.Marker({
+          position: myLatlng1,
+          map: map,
+          title: 'Hello World!'
+        });
       if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function(position){
            initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
           map.setCenter(initialLocation);
           map.setZoom(18);
+          marker.setPosition(initialLocation);
 
         });
+
       }
     }
 
