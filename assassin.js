@@ -64,6 +64,7 @@ if (Meteor.isClient) {
     }
   });
 
+
   Template.hello.events({
     'click button': function () {
       // increment the counter when button is clicked
@@ -95,5 +96,3 @@ var map = new google.maps.Map(document.getElementById("element_id"), {
 map.mapTypes.set(layer, new google.maps.StamenMapType(layer));
 
  */
-
-
