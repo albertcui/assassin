@@ -2,42 +2,30 @@ var map;
 if (Meteor.isClient) {
   
     
-  // counter starts at 0
+  // counter starts at 0 
   Session.setDefault("counter", 0);
 
   Template.hello.helpers({
     counter: function () {
       return Session.get("counter");
         
-//         hello: function() 
-//         {
-//             return "Hi";
-//         }
-    }
-  });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set("counter", Session.get("counter") + 1);
-    }
-  });
-
-}
-
-  Template.startup({
-      initialize: function(){
-        var mapOptions = {
+  //         hello: function() 
+  //         {
+  //             return "Hi";
+  //         }
+    },
+    initialize: function(){
+      var mapOptions = {
         zoom: 6
       };
 
       map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
+        mapOptions);
        // Try HTML5 geolocation
-      if(navigator.geolocation) {
+       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = new google.maps.LatLng(position.coords.latitude,
-                                           position.coords.longitude);
+           position.coords.longitude);
 
           var infowindow = new google.maps.InfoWindow({
             map: map,
@@ -53,9 +41,12 @@ if (Meteor.isClient) {
         // Browser doesn't support Geolocation
         handleNoGeolocation(false);
       }
-    }
+      google.maps.event.addDomListener(window, 'load', initialize);
 
-    function handleNoGeolocation(errorFlag) {
+    },
+
+
+    handleNoGeolocation: function(errorFlag) {
       if (errorFlag) {
         var content = 'Error: The Geolocation service failed.';
       } else {
@@ -71,10 +62,18 @@ if (Meteor.isClient) {
       var infowindow = new google.maps.InfoWindow(options);
       map.setCenter(options.position);
     }
-
   });
 
-  google.maps.event.addDomListener(window, 'load', initialize);
+  Template.hello.events({
+    'click button': function () {
+      // increment the counter when button is clicked
+      Session.set("counter", Session.get("counter") + 1);
+    }
+  });
+
+
+
+}
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
