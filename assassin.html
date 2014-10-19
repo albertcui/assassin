@@ -12,72 +12,16 @@
   </script>
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 
-  <script type="text/javascript">
-    function initialize() {
-      var layer = "toner";
-      var myLatlng1 = new google.maps.LatLng(53.65914, 0.072050);
-      var mapOptions = {
-        center: myLatlng1,
-        zoom: 8,
-        mapTypeId: layer,
-    mapTypeControlOptions: {
-        mapTypeIds: [layer]},
-      disableDefaultUI: true }
-      var map = new google.maps.Map(document.getElementById('map-canvas'),
-          mapOptions);
-
-      map.mapTypes.set(layer, new google.maps.StamenMapType(layer));
-
-      var marker = new google.maps.Marker({
-        position: myLatlng1});
-      var myLatlng2 = new google.maps.LatLng(40.7308, 0.73.9975);
-      var marker2 = new google.maps.Marker({
-        position: myLatlng2});
-
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(function(position){
-           initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          map.setCenter(initialLocation);
-          map.setZoom(17);
-          marker.setPosition(initialLocation);
-          watchCurrentPosition();
-
-        });
-
-      }
-    }
-            function watchCurrentPosition() {
-                var positionTimer = navigator.geolocation.watchPosition(
-                    function (position) {
-                        setMarkerPosition(
-                            marker,
-                            position
-                        );
-                    });
-            }
-
-            function setMarkerPosition(marker, position) {
-                marker.setPosition(
-                    new google.maps.LatLng(
-                        position.coords.latitude,
-                        position.coords.longitude)
-                );
-            }
-
-
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-  </script>
-
 </head>
 
 
 <body>
 	<h1>CU Assassins</h1>
-	<div id="map-canvas"></div>
+	{{> loginButtons}}
+	{{> map}}
 </body>
 
-<!--
+
 <template name="map">
-	<div id="map-canvas">{{initialize}}</div>
-</template> -->
+	<div id="map-canvas"></div>
+</template>
