@@ -9,7 +9,7 @@ function getLocation() {
 }
 
 if (Meteor.isClient) {
-  while(!Session.get("player")) {
+  if(!Session.get("player")) {
       Session.set("player", Players.findOne({name: "test"}))
   }
 

@@ -21,23 +21,24 @@
         zoom: 8,
         mapTypeId: layer,
     mapTypeControlOptions: {
-        mapTypeIds: [layer]
-      } }
+        mapTypeIds: [layer]},
+      disableDefaultUI: true }
       var map = new google.maps.Map(document.getElementById('map-canvas'),
           mapOptions);
 
       map.mapTypes.set(layer, new google.maps.StamenMapType(layer));
 
       var marker = new google.maps.Marker({
-          position: myLatlng1,
-          map: map,
-          title: 'Hello World!'
-        });
+        position: myLatlng1});
+      var myLatlng2 = new google.maps.LatLng(40.7308, 0.73.9975);
+      var marker2 = new google.maps.Marker({
+        position: myLatlng2});
+
       if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function(position){
            initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
           map.setCenter(initialLocation);
-          map.setZoom(18);
+          map.setZoom(17);
           marker.setPosition(initialLocation);
           watchCurrentPosition();
 
