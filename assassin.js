@@ -71,25 +71,24 @@ if (Meteor.isClient) {
               })
             }
           }
+        })
 
-          for (var property in markers) {
-            if (markers.hasOwnProperty(property)) {
-              if ('updated' in markers[property]) {
-                markers[property]['updated'] = false;
-              } else {
-                markers[property]['marker'].setMap(null)
-                delete markers[property]
-              }
+        for (var property in markers) {
+          if (markers.hasOwnProperty(property) && 'updated' in markers[property]) {
+            if (markers[property]['updated']) {
+              markers[property]['updated'] = false;
+            } else {
+              markers[property]['marker'].setMap(null)
+              delete markers[property]
             }
           }
-        })
-      })
-    }
+        }})
+      }
   }
 
-    Template.map.destroyed = function () {
-      this.handle && this.handle.stop();
-    };
+  Template.map.destroyed = function () {
+    this.handle && this.handle.stop();
+  };
 
 }
 
